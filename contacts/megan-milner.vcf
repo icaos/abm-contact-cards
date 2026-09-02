@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Milner;Megan;;;
 FN:Megan Milner
+ORG:Kansas
 TITLE:Commissioner
-ADR:;;;;Kansas;;
 TEL;TYPE=CELL:(785) 230-7103
 EMAIL:megan.milner@ks.gov
 END:VCARD

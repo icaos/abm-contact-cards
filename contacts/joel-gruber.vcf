@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Gruber;Joel;;;
 FN:Joel Gruber
+ORG:Indiana
 TITLE:DCA
-ADR:;;;;Indiana;;
 TEL;TYPE=CELL:(317) 832-6151
 EMAIL:jgruber@idoc.in.gov
 END:VCARD

@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Brooks;Antwanita;;;
 FN:Antwanita Brooks
+ORG:Indiana
 TITLE:Guest
-ADR:;;;;Indiana;;
 TEL;TYPE=CELL:(419) 296-9347
 EMAIL:antwanita.brooks@courts.in.gov
 END:VCARD

@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Hertel;Jerri;;;
 FN:Jerri Hertel
+ORG:Wisconsin
 TITLE:Guest
-ADR:;;;;Wisconsin;;
 TEL;TYPE=CELL:(608) 881-9414
 EMAIL:jerri.hertel@wisconsin.gov
 END:VCARD

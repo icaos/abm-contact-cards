@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Spader;Sarah;;;
 FN:Sarah Spader
+ORG:South Dakota
 TITLE:DCA
-ADR:;;;;South Dakota;;
 TEL;TYPE=CELL:(605) 413-6267
 EMAIL:sarah.spader@state.sd.us
 END:VCARD

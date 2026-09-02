@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Raptis;Jess;;;
 FN:Jess Raptis
+ORG:Minnesota
 TITLE:Guest
-ADR:;;;;Minnesota;;
 TEL;TYPE=CELL:(651) 357-4571
 EMAIL:jessica.raptis@state.mn.us
 END:VCARD

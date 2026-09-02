@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Welsh;Amy;;;
 FN:Amy Welsh
+ORG:Idaho
 TITLE:DCA
-ADR:;;;;Idaho;;
 TEL;TYPE=CELL:(208) 861-7843
 EMAIL:awelsh@idoc.idaho.gov
 END:VCARD

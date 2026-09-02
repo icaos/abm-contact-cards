@@ -2,7 +2,7 @@ BEGIN:VCARD
 VERSION:3.0
 N:Bruce;Zachary;;;
 FN:Zachary Bruce
+ORG:Minnesota
 TITLE:Guest
-ADR:;;;;Minnesota;;
 EMAIL:zachary.bruce@hennepin.us
 END:VCARD

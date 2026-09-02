@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Zimmerman;Megan;;;
 FN:Megan Zimmerman
+ORG:Colorado
 TITLE:DCA
-ADR:;;;;Colorado;;
 TEL;TYPE=CELL:(970) 426-2605
 EMAIL:megan.zimmerman@state.co.us
 END:VCARD

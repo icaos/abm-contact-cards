@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Pegues;Anthony G.;;;
 FN:Anthony G. Pegues
+ORG:New Jersey
 TITLE:Official Designee
-ADR:;;;;New Jersey;;
 TEL;TYPE=CELL:(609) 292-3450
 EMAIL:anthony.pegues@spb.nj.gov
 END:VCARD

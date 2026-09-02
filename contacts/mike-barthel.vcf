@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Barthel;Mike;;;
 FN:Mike Barthel
+ORG:Montana
 TITLE:Commissioner
-ADR:;;;;Montana;;
 TEL;TYPE=CELL:(406) 390-2449
 EMAIL:mbarthel@mt.gov
 END:VCARD

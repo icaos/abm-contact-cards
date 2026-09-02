@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Rowe;Hermina;;;
 FN:Hermina Rowe
+ORG:Georgia
 TITLE:Guest
-ADR:;;;;Georgia;;
 TEL;TYPE=CELL:(678) 374-9372
 EMAIL:hermina.rowe@pap.ga.gov
 END:VCARD

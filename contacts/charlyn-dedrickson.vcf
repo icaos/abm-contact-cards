@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Dedrickson;Charlyn;;;
 FN:Charlyn Dedrickson
+ORG:Utah
 TITLE:Guest
-ADR:;;;;Utah;;
 TEL;TYPE=CELL:(385) 499-0083
 EMAIL:cdedrickson@utah.gov
 END:VCARD

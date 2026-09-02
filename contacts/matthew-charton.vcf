@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Charton;Matthew;;;
 FN:Matthew Charton
+ORG:New York
 TITLE:Commissioner
-ADR:;;;;New York;;
 TEL;TYPE=CELL:(518) 708-5338
 EMAIL:matthew.charton@dcjs.ny.gov
 END:VCARD

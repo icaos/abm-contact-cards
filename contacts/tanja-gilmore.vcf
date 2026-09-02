@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Gilmore;Tanja;;;
 FN:Tanja Gilmore
+ORG:Washington
 TITLE:DCA
-ADR:;;;;Washington;;
 TEL;TYPE=CELL:(360) 790-1013
 EMAIL:tlgilmore@doc1.wa.gov
 END:VCARD

@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Hodges;Marcus;;;
 FN:Marcus Hodges
+ORG:District of Columbia
 TITLE:Commissioner
-ADR:;;;;District of Columbia;;
 TEL;TYPE=CELL:(202) 497-1223
 EMAIL:Marcus.Hodges@csosa.gov
 END:VCARD

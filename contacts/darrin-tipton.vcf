@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Tipton;Darrin;;;
 FN:Darrin Tipton
+ORG:Missouri
 TITLE:Guest
-ADR:;;;;Missouri;;
 TEL;TYPE=CELL:(573) 450-5391
 EMAIL:darrin.tipton@doc.mo.gov
 END:VCARD

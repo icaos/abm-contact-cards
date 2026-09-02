@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Shardlow;Jeff;;;
 FN:Jeff Shardlow
+ORG:Utah
 TITLE:Official Designee
-ADR:;;;;Utah;;
 TEL;TYPE=CELL:(801) 698-7056
 EMAIL:jshardlow@utah.gov
 END:VCARD

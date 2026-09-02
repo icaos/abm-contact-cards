@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Lewandowski;Bradley;;;
 FN:Bradley Lewandowski
+ORG:South Dakota
 TITLE:Commissioner
-ADR:;;;;South Dakota;;
 TEL;TYPE=CELL:(605) 380-8943
 EMAIL:Bradley.lewandowski@state.sd.us
 END:VCARD

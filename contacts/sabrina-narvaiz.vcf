@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Narvaiz;Sabrina;;;
 FN:Sabrina Narvaiz
+ORG:New Mexico
 TITLE:Guest
-ADR:;;;;New Mexico;;
 TEL;TYPE=CELL:(505) 795-5855
 EMAIL:sabrina.narvaiz@cd.nm.gov
 END:VCARD

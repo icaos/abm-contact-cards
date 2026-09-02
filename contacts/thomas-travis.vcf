@@ -2,7 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Travis;Thomas;;;
 FN:Thomas Travis
-TITLE:ICAOS Staff
+ORG:ICAOS
+TITLE:General Counsel
 TEL;TYPE=CELL:(859) 288-7426
 EMAIL:ttravis@bricker.com
 END:VCARD

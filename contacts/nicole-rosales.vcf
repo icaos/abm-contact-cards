@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Rosales;Nicole;;;
 FN:Nicole Rosales
+ORG:Nevada
 TITLE:DCA
-ADR:;;;;Nevada;;
 TEL;TYPE=CELL:(702) 776-1501
 EMAIL:nrosales@dps.state.nv.us
 END:VCARD

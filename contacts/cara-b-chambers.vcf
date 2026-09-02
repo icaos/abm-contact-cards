@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Chambers;Cara B.;;;
 FN:Cara B. Chambers
+ORG:Wyoming
 TITLE:Guest
-ADR:;;;;Wyoming;;
 TEL;TYPE=CELL:(307) 399-0307
 EMAIL:cara.chambers@wyo.gov
 END:VCARD

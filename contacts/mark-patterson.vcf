@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Patterson;Mark;;;
 FN:Mark Patterson
+ORG:Oregon
 TITLE:DCA
-ADR:;;;;Oregon;;
 TEL;TYPE=CELL:(503) 856-4184
 EMAIL:Mark.G.Patterson@doc.oregon.gov
 END:VCARD

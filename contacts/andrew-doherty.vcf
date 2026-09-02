@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Doherty;Andrew;;;
 FN:Andrew Doherty
+ORG:Massachusetts
 TITLE:Guest
-ADR:;;;;Massachusetts;;
 TEL;TYPE=CELL:(774) 721-3114
 EMAIL:andrew.s.doherty2@mass.gov
 END:VCARD

@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Garrett;Kristen;;;
 FN:Kristen Garrett
+ORG:Ohio
 TITLE:Guest
-ADR:;;;;Ohio;;
 TEL;TYPE=CELL:(614) 867-6624
 EMAIL:kristen.garrett@drc.ohio.gov
 END:VCARD

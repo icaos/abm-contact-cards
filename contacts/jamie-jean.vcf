@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Jean;Jamie;;;
 FN:Jamie Jean
+ORG:Delaware
 TITLE:DCA
-ADR:;;;;Delaware;;
 TEL;TYPE=CELL:(302) 498-5303
 EMAIL:jamie.jean@delaware.gov
 END:VCARD

@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Colver;Lorna;;;
 FN:Lorna Colver
+ORG:Alaska
 TITLE:DCA
-ADR:;;;;Alaska;;
 TEL;TYPE=CELL:(907) 538-2117
 EMAIL:lorna.colver@alaska.gov
 END:VCARD

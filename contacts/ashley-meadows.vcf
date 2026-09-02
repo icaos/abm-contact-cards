@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Meadows;Ashley;;;
 FN:Ashley Meadows
+ORG:North Carolina
 TITLE:DCA
-ADR:;;;;North Carolina;;
 TEL;TYPE=CELL:(252) 578-2243
 EMAIL:ashley.meadows@dac.nc.gov
 END:VCARD

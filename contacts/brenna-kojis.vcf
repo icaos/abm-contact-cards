@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Kojis;Brenna;;;
 FN:Brenna Kojis
+ORG:Wisconsin
 TITLE:DCA
-ADR:;;;;Wisconsin;;
 TEL;TYPE=CELL:(608) 220-8527
 EMAIL:brenna.kojis@wisconsin.gov
 END:VCARD

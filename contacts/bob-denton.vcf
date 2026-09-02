@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Denton;Bob;;;
 FN:Bob Denton
+ORG:Nebraska
 TITLE:Commissioner
-ADR:;;;;Nebraska;;
 TEL;TYPE=CELL:(402) 720-3733
 EMAIL:bob.denton@nejudicial.gov
 END:VCARD

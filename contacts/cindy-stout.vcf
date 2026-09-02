@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Stout;Cindy;;;
 FN:Cindy Stout
+ORG:Texas
 TITLE:DCA
-ADR:;;;;Texas;;
 TEL;TYPE=CELL:(512) 406-5989
 EMAIL:cynthia.stout@tdcj.texas.gov
 END:VCARD

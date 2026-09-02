@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Zavaras;Andrew;;;
 FN:Andrew Zavaras
+ORG:Colorado
 TITLE:Commissioner
-ADR:;;;;Colorado;;
 TEL;TYPE=CELL:(303) 591-5357
 EMAIL:andrew.zavaras@state.co.us
 END:VCARD

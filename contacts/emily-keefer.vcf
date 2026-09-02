@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Keefer;Emily;;;
 FN:Emily Keefer
+ORG:Oklahoma
 TITLE:DCA
-ADR:;;;;Oklahoma;;
 TEL;TYPE=CELL:(419) 350-3159
 EMAIL:emily.keefer@doc.ok.gov
 END:VCARD

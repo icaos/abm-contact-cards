@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Colón;Raquel;;;
 FN:Raquel Colón
+ORG:Puerto Rico
 TITLE:Commissioner
-ADR:;;;;Puerto Rico;;
 TEL;TYPE=CELL:(787) 646-9051
 EMAIL:rcolon@dcr.pr.gov
 END:VCARD

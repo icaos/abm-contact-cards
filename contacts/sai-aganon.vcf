@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Aganon;Sai;;;
 FN:Sai Aganon
+ORG:Hawaii
 TITLE:Commissioner
-ADR:;;;;Hawaii;;
 TEL;TYPE=CELL:(808) 539-4550
 EMAIL:saifoloi.v.aganon@courts.hawaii.gov
 END:VCARD

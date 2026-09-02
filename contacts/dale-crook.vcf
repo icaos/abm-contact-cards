@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Crook;Dale;;;
 FN:Dale Crook
+ORG:Vermont
 TITLE:Commissioner
-ADR:;;;;Vermont;;
 TEL;TYPE=CELL:(802) 279-7320
 EMAIL:dale.crook@vermont.gov
 END:VCARD

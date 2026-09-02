@@ -2,6 +2,7 @@ BEGIN:VCARD
 VERSION:3.0
 N:LaBahn;David;;;
 FN:David LaBahn
+ORG:APA
 TITLE:Ex-Officio
 TEL;TYPE=CELL:(202) 570-0763
 EMAIL:David.LaBahn@APAInc.org

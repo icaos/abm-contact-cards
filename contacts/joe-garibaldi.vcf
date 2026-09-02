@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Garibaldi;Joe;;;
 FN:Joe Garibaldi
+ORG:Connecticut
 TITLE:DCA
-ADR:;;;;Connecticut;;
 TEL;TYPE=CELL:(203) 509-9157
 EMAIL:Joe.Garibaldi@ct.gov
 END:VCARD

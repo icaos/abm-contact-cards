@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Hudrlik;Tracy;;;
 FN:Tracy Hudrlik
+ORG:Minnesota
 TITLE:Commissioner
-ADR:;;;;Minnesota;;
 TEL;TYPE=CELL:(651) 285-9271
 EMAIL:tracy.hudrlik@state.mn.us
 END:VCARD

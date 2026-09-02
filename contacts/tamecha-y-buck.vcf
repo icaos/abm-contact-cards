@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Buck;Tamecha Y.;;;
 FN:Tamecha Y. Buck
+ORG:Georgia
 TITLE:Guest
-ADR:;;;;Georgia;;
 TEL;TYPE=CELL:(404) 295-1947
 EMAIL:tamecha.buck@dcs.ga.gov
 END:VCARD

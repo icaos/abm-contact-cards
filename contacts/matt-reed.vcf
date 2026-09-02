@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Reed;Matt;;;
 FN:Matt Reed
+ORG:Pennsylvania
 TITLE:DCA
-ADR:;;;;Pennsylvania;;
 TEL;TYPE=CELL:(717) 680-7328
 EMAIL:matreed@pa.gov
 END:VCARD

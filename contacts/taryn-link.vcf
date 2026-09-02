@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Link;Taryn;;;
 FN:Taryn Link
+ORG:Alaska
 TITLE:Commissioner
-ADR:;;;;Alaska;;
 TEL;TYPE=CELL:(907) 717-4752
 EMAIL:taryn.link@alaska.gov
 END:VCARD

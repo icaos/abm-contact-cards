@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Hammond;Simona;;;
 FN:Simona Hammond
+ORG:Iowa
 TITLE:Commissioner
-ADR:;;;;Iowa;;
 TEL;TYPE=CELL:(515) 499-5890
 EMAIL:simona.hammond@iowa.gov
 END:VCARD

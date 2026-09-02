@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Juba;Nicole;;;
 FN:Nicole Juba
+ORG:Minnesota
 TITLE:Guest
-ADR:;;;;Minnesota;;
 TEL;TYPE=CELL:(952) 496-8281
 EMAIL:njuba@co.scott.mn.us
 END:VCARD

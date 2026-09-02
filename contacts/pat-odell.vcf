@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Odell;Pat;;;
 FN:Pat Odell
+ORG:Wyoming
 TITLE:DCA
-ADR:;;;;Wyoming;;
 TEL;TYPE=CELL:(307) 777-5952
 EMAIL:pat.odell@wyo.gov
 END:VCARD

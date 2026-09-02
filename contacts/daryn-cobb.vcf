@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Cobb;Daryn;;;
 FN:Daryn Cobb
+ORG:Michigan
 TITLE:DCA
-ADR:;;;;Michigan;;
 TEL;TYPE=CELL:(517) 241-7100
 EMAIL:CobbD@michigan.gov
 END:VCARD

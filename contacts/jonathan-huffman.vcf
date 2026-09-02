@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Huffman;Jonathan;;;
 FN:Jonathan Huffman
+ORG:West Virginia
 TITLE:Commissioner
-ADR:;;;;West Virginia;;
 TEL;TYPE=CELL:(304) 352-4714
 EMAIL:Jonathan.E.Huffman@wv.gov
 END:VCARD

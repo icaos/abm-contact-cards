@@ -46,24 +46,6 @@ SOURCE_SHEET = "Submissions"
 CONTACTS_DIR = "contacts"
 QRCODES_DIR = "qrcodes"
 
-# The "State" column is free text and does not always hold a state. Some rows
-# carry a job title there (staff rather than a state delegate), and others an
-# organization acronym. Only a real US state/territory becomes the vCard's
-# address region; anything else is left off rather than written into an
-# address field where it would be wrong.
-US_STATES = {
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-    "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia",
-    "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-    "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
-    "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
-    "New Hampshire", "New Jersey", "New Mexico", "New York",
-    "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
-    "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina",
-    "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands",
-    "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",
-}
-
 # --- Helpers -------------------------------------------------------------
 
 
@@ -118,13 +100,28 @@ def load_people(path: str, sheet: str) -> list:
         if not first and not last:
             continue
 
+        state, title = field("State"), field("Title")
+
+        # The State column is free text and holds three different things:
+        # a US state for delegates, an organization acronym for ex-officio
+        # members (APA, NCSL, ICJ...), and - for ICAOS staff - their job
+        # title, with "ICAOS Staff" sitting in the Title column instead.
+        # For those rows the two columns are effectively swapped, so they
+        # are put back the right way round here: the employer becomes the
+        # company and the specific role becomes the title. Left alone,
+        # those contacts would show "Education Manager" as their company.
+        if title == "ICAOS Staff":
+            org, title = "ICAOS", state
+        else:
+            org = state
+
         people.append({
             "row": row_number,
             "first": first,
             "last": last,
             "full_name": f"{first} {last}".strip(),
-            "state": field("State"),
-            "title": field("Title"),
+            "org": org,
+            "title": title,
             "email": field("Email"),
             "phone": field("Phone"),
         })
@@ -157,7 +154,7 @@ def merge_duplicates(people: list) -> list:
 
         if person["title"] and person["title"] not in existing["titles"]:
             existing["titles"].append(person["title"])
-        for field in ("state", "phone", "email"):
+        for field in ("org", "phone", "email"):
             if not existing[field]:
                 existing[field] = person[field]
 
@@ -199,10 +196,13 @@ def build_vcard(person: dict) -> str:
         f"FN:{escape(person['full_name'])}",
     ]
 
+    # ORG (Company) carries the state, or the organization for ex-officio
+    # members. It replaces an earlier ADR line that held nothing but a state,
+    # which phones rendered as a mostly-empty address block.
+    if person["org"]:
+        lines.append(f"ORG:{escape(person['org'])}")
     if person["title"]:
         lines.append(f"TITLE:{escape(person['title'])}")
-    if person["state"] in US_STATES:
-        lines.append(f"ADR:;;;;{escape(person['state'])};;")
     if person["phone"]:
         lines.append(f"TEL;TYPE=CELL:{escape(person['phone'])}")
     if person["email"]:

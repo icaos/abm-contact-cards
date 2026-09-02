@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Stromberg;Jeremiah;;;
 FN:Jeremiah Stromberg
+ORG:Oregon
 TITLE:Commissioner
-ADR:;;;;Oregon;;
 TEL;TYPE=CELL:(503) 983-1441
 EMAIL:jeremiah.p.stromberg@doc.oregon.gov
 END:VCARD

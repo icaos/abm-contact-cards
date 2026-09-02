@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Testamark;Wynne;;;
 FN:Wynne Testamark
+ORG:Virgin Islands
 TITLE:Commissioner
-ADR:;;;;Virgin Islands;;
 TEL;TYPE=CELL:(340) 725-0735
 EMAIL:wynnie.testamark@boc.vi.gov
 END:VCARD

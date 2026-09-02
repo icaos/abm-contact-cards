@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Bland;Shyra;;;
 FN:Shyra Bland
+ORG:New Jersey
 TITLE:DCA
-ADR:;;;;New Jersey;;
 TEL;TYPE=CELL:(609) 203-8600
 EMAIL:shyra.bland@njcourts.gov
 END:VCARD

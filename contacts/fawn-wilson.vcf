@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Wilson;Fawn;;;
 FN:Fawn Wilson
+ORG:Minnesota
 TITLE:Guest
-ADR:;;;;Minnesota;;
 TEL;TYPE=CELL:(612) 703-6300
 EMAIL:fawn.wilson@state.mn.us
 END:VCARD

@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Hill;Chris;;;
 FN:Chris Hill
+ORG:Tennessee
 TITLE:Commissioner
-ADR:;;;;Tennessee;;
 TEL;TYPE=CELL:(931) 797-9257
 EMAIL:Christopher.M.Hill@tn.gov
 END:VCARD

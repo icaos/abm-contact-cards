@@ -2,7 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Greeott;Drake;;;
 FN:Drake Greeott
-TITLE:ICAOS Staff
+ORG:ICAOS
+TITLE:Web Development Manager
 TEL;TYPE=CELL:(859) 721-1055
 EMAIL:dgreeott@interstatecompact.org
 END:VCARD

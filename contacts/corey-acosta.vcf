@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Acosta;Corey;;;
 FN:Corey Acosta
+ORG:Louisiana
 TITLE:Commissioner
-ADR:;;;;Louisiana;;
 TEL;TYPE=CELL:(985) 413-6972
 EMAIL:Corey.Acosta@la.gov
 END:VCARD

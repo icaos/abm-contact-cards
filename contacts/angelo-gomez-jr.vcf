@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N:Gomez\, Jr.;Angelo;;;
 FN:Angelo Gomez\, Jr.
+ORG:Massachusetts
 TITLE:Commissioner
-ADR:;;;;Massachusetts;;
 TEL;TYPE=CELL:(508) 397-2913
 EMAIL:angelo.gomez@mass.gov
 END:VCARD
