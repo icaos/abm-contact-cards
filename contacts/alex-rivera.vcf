@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Rivera;Alex;;;
+FN:Alex Rivera
+TITLE:Customer Success Manager
+ADR:;;;;CA;;
+TEL;TYPE=CELL:+1-555-010-0003
+EMAIL:alex.rivera@example.com
+URL:https://example.com
+END:VCARD

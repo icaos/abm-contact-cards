@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Smith;John;;;
+FN:John Smith
+TITLE:Sales Director
+ADR:;;;;TX;;
+TEL;TYPE=CELL:+1-555-010-0002
+EMAIL:john.smith@example.com
+URL:https://example.com
+END:VCARD
