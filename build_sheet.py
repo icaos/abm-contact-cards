@@ -37,55 +37,71 @@ import os
 TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&family=Quicksand:wght@400;500;600;700&display=swap">
 <style>
   :root {
-    --paper:      #F3F4F6;
+    /* ICAOS brand palette. Maroon is the single accent; slate blue carries
+       the "placed" state so the page stays inside the brand rather than
+       importing a generic success green. */
+    --brand-maroon: #822c2e;
+    --brand-navy:   #0e1a31;
+    --brand-slate:  #2e415d;
+    --brand-grey:   #757a7c;
+    --brand-mist:   #d3d3d3;
+
+    --paper:      #F6F6F7;
     --surface:    #FFFFFF;
-    --ink:        #15181D;
-    --muted:      #69717E;
-    --accent:     #2C5D63;
+    --ink:        var(--brand-navy);
+    --muted:      var(--brand-grey);
+    --accent:     var(--brand-maroon);
     --accent-ink: #FFFFFF;
-    --rule:       #DCE0E5;
-    --done:       #E8EFEA;
-    --done-ink:   #2F6B45;
+    --rule:       var(--brand-mist);
+    --done:       #E9EDF3;
+    --done-ink:   var(--brand-slate);
     --qr-ground:  #FFFFFF;
 
-    --step--1: 0.75rem;
-    --step-0:  0.9375rem;
-    --step-1:  1.125rem;
-    --step-2:  1.5rem;
-    --step-3:  2.125rem;
+    /* Fluid scale: the page is read on a laptop at a badge table and on a
+       phone while walking the room, so sizes track the viewport. */
+    --step--1: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+    --step-0:  clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+    --step-1:  clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --step-2:  clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+    --step-3:  clamp(1.75rem, 1.35rem + 1.9vw, 2.5rem);
 
-    --sans: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --display: "Questrial", "Futura", "Century Gothic", sans-serif;
+    --sans:    "Quicksand", "Trebuchet MS", "Segoe UI", sans-serif;
+    --mono:    ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper:      #14171B;
-      --surface:    #1C2026;
-      --ink:        #E9ECEF;
-      --muted:      #9AA3AF;
-      --accent:     #6FB3B8;
-      --accent-ink: #10161A;
-      --rule:       #2C323A;
-      --done:       #1E2C24;
-      --done-ink:   #86C9A0;
-      --qr-ground:  #FFFFFF;
+    --paper:      var(--brand-navy);
+    --surface:    #17233C;
+    --ink:        #EEF1F5;
+    --muted:      #9BA4AE;
+    /* The brand maroon is too dark to read on navy, so the dark theme uses a
+       lightened tint of it rather than a different hue. */
+    --accent:     #C86F71;
+    --accent-ink: var(--brand-navy);
+    --rule:       var(--brand-slate);
+    --done:       #1C2C49;
+    --done-ink:   #A9BFDD;
+    --qr-ground:  #FFFFFF;
     }
   }
 
   :root[data-theme="dark"] {
-    --paper:      #14171B;
-    --surface:    #1C2026;
-    --ink:        #E9ECEF;
-    --muted:      #9AA3AF;
-    --accent:     #6FB3B8;
-    --accent-ink: #10161A;
-    --rule:       #2C323A;
-    --done:       #1E2C24;
-    --done-ink:   #86C9A0;
+    --paper:      var(--brand-navy);
+    --surface:    #17233C;
+    --ink:        #EEF1F5;
+    --muted:      #9BA4AE;
+    /* The brand maroon is too dark to read on navy, so the dark theme uses a
+       lightened tint of it rather than a different hue. */
+    --accent:     #C86F71;
+    --accent-ink: var(--brand-navy);
+    --rule:       var(--brand-slate);
+    --done:       #1C2C49;
+    --done-ink:   #A9BFDD;
     --qr-ground:  #FFFFFF;
   }
 
@@ -101,7 +117,10 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .wrap {
+    max-width: 1180px; margin: 0 auto;
+    padding: clamp(1.5rem, 5vw, 2.5rem) clamp(0.875rem, 4vw, 1.5rem) 4rem;
+  }
 
   /* --- Masthead --- */
   .masthead { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
@@ -113,6 +132,7 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
     color: var(--accent);
   }
   h1 {
+    font-family: var(--display);
     font-size: var(--step-3);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -145,6 +165,8 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
   /* --- Toolbar --- */
   .toolbar {
     position: sticky; top: 0; z-index: 10;
+    /* Cover the grid scrolling underneath the sticky bar. */
+    background: var(--paper);
     background: var(--paper);
     border-bottom: 1px solid var(--rule);
     padding: 1rem 0 0.875rem;
@@ -218,7 +240,8 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
     padding-bottom: 0.5rem; margin-bottom: 1.25rem;
   }
   .role-head h2 {
-    font-size: var(--step-2); font-weight: 600; letter-spacing: -0.01em; margin: 0;
+    font-family: var(--display); font-size: var(--step-2);
+    font-weight: 400; letter-spacing: 0; margin: 0;
   }
   .role-head .n {
     font-family: var(--mono); font-size: var(--step--1);
@@ -227,8 +250,8 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(11.25rem, 1fr));
-    gap: 0.875rem;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(7.5rem, 26vw, 11.25rem), 1fr));
+    gap: clamp(0.5rem, 2vw, 0.875rem);
   }
 
   /* --- Badge tile --- */
@@ -254,7 +277,7 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
        and can defeat a scanner. Keep the edges hard. */
     image-rendering: pixelated;
   }
-  .name { font-weight: 600; line-height: 1.25; text-wrap: balance; }
+  .name { font-weight: 600; line-height: 1.25; text-wrap: balance; overflow-wrap: anywhere; }
   .org { color: var(--muted); font-size: var(--step--1); }
   /* Shown only where the section heading does not already name the role -
      i.e. the dual-role tiles. */
@@ -275,6 +298,28 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
   .tile[data-done="false"] .mark { visibility: hidden; }
 
   .empty { color: var(--muted); padding: 2rem 0; }
+
+  @media (max-width: 34rem) {
+    .toolrow { gap: 0.5rem; }
+    .search { flex: 1 1 100%; order: -1; }
+    .progress { flex: 1 1 auto; }
+    .chips {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: 0.25rem;
+      /* Fade the right edge so it reads as scrollable rather than clipped. */
+      mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+    }
+    .chip { flex: 0 0 auto; }
+    .howto { font-size: var(--step--1); }
+  }
+
+  /* Coarse pointers need a bigger hit area than a mouse. */
+  @media (pointer: coarse) {
+    .chip { padding: 0.45rem 0.85rem; }
+    .btn { padding: 0.55rem 0.9rem; }
+  }
 
   @media (prefers-reduced-motion: no-preference) {
     .tile, .chip, .btn { transition: border-color 120ms ease, background 120ms ease, color 120ms ease; }

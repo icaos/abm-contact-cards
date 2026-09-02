@@ -1,83 +1,130 @@
 # ABM Contact Cards
 
-Static, privacy-friendly "scan to save contact" QR codes for event badges,
-signage, and slides.
+Static, vendor-free "scan to save contact" QR codes for ICAOS Annual Business
+Meeting nametags, signage, and slides.
 
-No third-party QR/analytics vendor is involved. Each QR code encodes a link
-to a plain `.vcf` (vCard) file hosted on GitHub Pages. Scanning it opens the
-phone's native "Add Contact" screen directly — nothing is logged, tracked,
-or sold.
+Each QR code encodes a link to a plain `.vcf` (vCard) file published via
+GitHub Pages. Scanning it opens the phone's native "Add Contact" screen
+directly — no landing page, no third-party redirect, and no QR vendor
+sitting in the middle collecting scan analytics.
 
-## How it works
+## Why this is useful after printing
 
-- `contacts/<slug>.vcf` — one vCard file per rep, hosted via GitHub Pages
-- `qrcodes/<slug>.png` — a QR code image pointing at that hosted `.vcf` URL
-- `generate.py` — regenerates both from the `reps` list in the script
+The QR image encodes a *URL*, not the contact details themselves. Correcting
+someone's title or phone number means editing the `.vcf` that URL points at —
+the printed code keeps working and nothing needs reprinting. This has been
+verified in production, not just assumed.
+
+## Contents
+
+| Path | What it is |
+|---|---|
+| `contacts/<slug>.vcf` | One vCard per attendee, served over GitHub Pages |
+| `qrcodes/<slug>.png` | The QR code pointing at that vCard's URL |
+| `generate.py` | Builds both, from the source spreadsheet |
+| `build_sheet.py` | Builds `nametag-sheet.html`, the QR assembly page |
+| `build_csv.py` | Builds `nametag-merge.csv` for badge mail-merge |
+| `build_xlsx.py` | Builds `nametag-merge.xlsx`, same data with QR images embedded |
+
+## Source data
+
+Attendees are read from `NameTag_Data_1.xlsx` (sheet `Submissions`, columns:
+First, Last, State, Title, Email, Phone).
+
+**That spreadsheet is gitignored and must stay that way.** It holds real
+contact details for 151 government officials, and this repo is public — so
+`*.xlsx`, `*.csv`, and the generated merge files are all excluded. A fresh
+clone will not have it; copy it in before running anything.
+
+### Two quirks in that sheet, handled automatically
+
+- **One row per role, not per person.** Someone holding two roles appears
+  twice. Those rows are merged into one card so nobody gets two badges, with
+  their roles joined into a single title.
+- **ICAOS staff have State and Title swapped.** Their `State` cell holds a
+  job title and `Title` reads `ICAOS Staff`. `generate.py` puts these back the
+  right way round for the phone contact (`ORG:ICAOS`, title = their real
+  role). `build_csv.py` and `build_xlsx.py` deliberately keep the raw
+  spreadsheet layout, because the badge template expects those columns as-is.
 
 ## Setup
 
-1. **Clone this repo** (or create a new GitHub repo and copy these files in).
+```bash
+pip install -r requirements.txt
+```
 
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Regenerating everything
 
-3. **Edit `generate.py`:**
-   - Set `GITHUB_USERNAME` and `REPO_NAME` at the top to match your repo.
-   - Edit the `reps` list with real rep details (name, title, state, phone,
-     email, website).
+Order matters — `build_sheet.py` reads `contacts/`, so it must run after
+`generate.py`:
 
-4. **Run the generator:**
-   ```bash
-   python3 generate.py
-   ```
-   This writes/updates files in `contacts/` and `qrcodes/`.
+```bash
+python3 generate.py && python3 build_sheet.py && python3 build_csv.py && python3 build_xlsx.py
+```
 
-5. **Commit and push:**
-   ```bash
-   git add contacts/ qrcodes/
-   git commit -m "Update contact cards"
-   git push
-   ```
+`build_sheet.py` refuses to run if the spreadsheet is newer than the cards,
+rather than quietly producing a sheet from stale data.
 
-6. **Enable GitHub Pages** (one-time setup):
-   - Go to the repo's **Settings → Pages**
-   - Under "Build and deployment", set **Source** to "Deploy from a branch"
-   - Set **Branch** to `main` (or your default branch) and folder to `/ (root)`
-   - Save. GitHub will publish the site at:
-     `https://<GITHUB_USERNAME>.github.io/<REPO_NAME>/`
-   - It can take a minute or two to go live the first time.
+Then commit and push `contacts/`, `qrcodes/`, and `nametag-sheet.html`, and
+let GitHub Pages redeploy. The merge files stay local — they are gitignored.
 
-7. **Print or embed the QR codes** from `qrcodes/` on badges, table signage,
-   or slides.
+## Updating someone after badges are printed
 
-## Updating a rep's info after printing
+1. Fix their row in the spreadsheet.
+2. Rerun the commands above. Their `.vcf` is rewritten; the QR image is
+   **not**, because the URL has not changed.
+3. Commit, push, wait for Pages to redeploy.
+4. Done. The already-printed code now serves the corrected details.
 
-If a phone number, email, or title is wrong:
+## Adding an attendee
 
-1. Edit that rep's entry in the `reps` list in `generate.py`.
-2. Rerun `python3 generate.py` — this rewrites their `.vcf` file.
-   (The QR code image itself does not change, since it just points to the
-   same URL.)
-3. Commit and push the updated `contacts/<slug>.vcf` file.
-4. Done — no reprinting needed. The already-printed QR code now serves the
-   corrected info within a minute or two of GitHub Pages redeploying.
+Add a row to the spreadsheet and rerun. A new slug, card, and QR code appear.
 
-## Adding a new rep
+## Outputs for badge production
 
-Add a new entry to the `reps` list in `generate.py` with a unique `slug`,
-then rerun the script, commit, and push. A new QR code will appear in
-`qrcodes/`.
+| File | For | Notes |
+|---|---|---|
+| `nametag-sheet.html` | Working through placements | Grouped by role, searchable, tracks what has been placed. Published at `/nametag-sheet.html` |
+| `nametag-merge.csv` | Driving the badge printer | `Photo File Name` names the QR image; ship it with the `qrcodes/` folder |
+| `nametag-merge.xlsx` | Checking by eye | Same columns plus the QR image embedded, so a wrong code is visible before printing |
+
+A `.csv` cannot contain images — it is plain text. That is why mail-merge
+software uses a filename column and pulls each image from a folder at print
+time. The `.xlsx` embeds pictures for human review, but most merge tools will
+still read the filename column, so keep the images alongside it.
+
+## Hosting
+
+GitHub Pages serves this repo's root, so the cards are live at:
+
+```
+https://icaos.github.io/abm-contact-cards/contacts/<slug>.vcf
+```
+
+Pages serves `.vcf` as `text/x-vcard`, which iOS and Android both handle.
+
+### The repo is public — and that is a deliberate, revisitable choice
+
+Pages on a private repo requires a paid plan, so the repo was made public to
+ship quickly. The consequence: the full attendee roster is clonable, and git
+history survives forks, so **going private later does not retract what has
+already been published**.
+
+To move to a private repo: upgrade the account to Pro/Team **first**, then
+flip the repo private. Pages keeps publishing and the URLs are unchanged, so
+already-printed QR codes keep working. Flipping private on a free plan
+disables Pages instead.
+
+A self-hosted alternative (NGINX behind Traefik, serving `contacts/` with
+directory listing off) was considered and set aside for time. It is the right
+answer if the roster should stop being publicly enumerable.
 
 ## Privacy notes
 
-- No QR/analytics vendor sits in the middle of a scan — the `.vcf` file is
-  served directly from GitHub Pages.
-- GitHub Pages is a static file host; it does not run scan analytics or sell
-  data. Standard GitHub access/traffic logs apply, same as any GitHub-hosted
-  site.
-- There is no scan-count or location analytics with this approach. If you
-  need that later, that's a deliberate trade-off — see the discussion in
-  chat about dynamic QR vendors and their data-sharing practices before
-  adding one back in.
+- No QR or analytics vendor is involved in a scan. The `.vcf` is served
+  directly by GitHub Pages.
+- Standard GitHub traffic logs apply. There is no scan-count or location
+  analytics, by design.
+- Cards carry the same information as a printed business card: name, title,
+  state or organization, work phone, work email. Do not add personal
+  addresses or personal mobile numbers.
