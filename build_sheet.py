@@ -34,7 +34,7 @@ import glob
 import json
 import os
 
-TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
+TEMPLATE = r'''<title>ABM Contact Cards</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&family=Quicksand:wght@400;500;600;700&display=swap">
@@ -342,17 +342,15 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
 
 <div class="wrap">
   <header class="masthead">
-    <div class="eyebrow">ICAOS &middot; Annual Business Meeting</div>
-    <h1>Nametag QR Assembly</h1>
+    <div class="eyebrow">ICAOS Annual Business Meeting</div>
+    <h1>ABM Contact Cards</h1>
     <p class="lede">
-      Every attendee&rsquo;s scan-to-save QR code, grouped by role. Scanning one
-      opens the phone&rsquo;s Add&nbsp;Contact screen with that person&rsquo;s details
-      already filled in.
+      Everyone&rsquo;s QR code, grouped by role. Scanning one saves that person
+      straight to a phone.
     </p>
     <div class="howto">
-      <div><b>To place a code:</b> find the person, then use the file named under their QR &mdash; it lives in <code>qrcodes/</code> in the repo.</div>
-      <div><b>Click a tile</b> once the code is on their nametag. Progress is saved in this browser, so you can close the page and come back.</div>
-      <div><b>Print</b> for a paper worksheet &mdash; codes print at about 1&nbsp;inch, the smallest size that scans reliably.</div>
+      <div>Each code&rsquo;s file name is printed under it &mdash; the images are in the <code>qrcodes</code> folder.</div>
+      <div>Click a tile once its code is on the nametag. Your progress saves automatically.</div>
     </div>
   </header>
 
