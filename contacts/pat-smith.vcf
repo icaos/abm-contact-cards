@@ -1,0 +1,9 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Smith;Pat;;;
+FN:Pat Smith
+TITLE:Guest
+ADR:;;;;Minnesota;;
+TEL;TYPE=CELL:(651) 508-2246
+EMAIL:patrick.smith@state.mn.us
+END:VCARD

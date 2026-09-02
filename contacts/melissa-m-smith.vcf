@@ -1,0 +1,9 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Smith;Melissa M.;;;
+FN:Melissa M. Smith
+TITLE:Commissioner
+ADR:;;;;Illinois;;
+TEL;TYPE=CELL:(217) 558-0917
+EMAIL:melissa.m.smith@illinois.gov
+END:VCARD

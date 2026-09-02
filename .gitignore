@@ -3,3 +3,13 @@ __pycache__/
 .DS_Store
 venv/
 .venv/
+
+# Source spreadsheets with real contact data. NEVER commit these — this repo
+# is public, and git history survives forks, clones, and a later flip to
+# private. The .vcf files in contacts/ are the only data meant to be served.
+*.xlsx
+*.xls
+*.csv
+
+# WSL download provenance markers
+*:Zone.Identifier
