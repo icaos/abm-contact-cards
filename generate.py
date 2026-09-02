@@ -31,7 +31,7 @@ import qrcode
 
 # --- Configuration -----------------------------------------------------
 
-GITHUB_USERNAME = "GITHUB_USERNAME"   # <-- set this to your GitHub username/org
+GITHUB_USERNAME = "icaos"             # GitHub account hosting this repo
 REPO_NAME = "abm-contact-cards"       # <-- set this to your repo name
 
 CONTACTS_DIR = "contacts"
