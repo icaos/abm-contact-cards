@@ -458,6 +458,7 @@ TEMPLATE = r'''<title>ABM Nametag QR Assembly</title>
 OUTPUT = "nametag-sheet.html"
 CONTACTS_DIR = "contacts"
 QRCODES_DIR = "qrcodes"
+SOURCE_XLSX = "NameTag_Data_1.xlsx"
 
 
 def unescape(value: str) -> str:
@@ -492,6 +493,40 @@ def section_for(title: str, org: str) -> str:
     if org == "ICAOS":
         return "ICAOS Staff"
     return title
+
+
+def check_cards_are_current() -> None:
+    """
+    Refuse to build from cards that are older than the spreadsheet.
+
+    This script reads contacts/, not the spreadsheet, so running it before
+    generate.py silently produces a sheet built from the previous data - and
+    a stale sheet is not obviously stale. It looks completely normal right up
+    until someone at the badge table works from the wrong titles. Comparing
+    timestamps makes that mistake impossible to make quietly, whichever order
+    the two scripts are run in.
+
+    The check is skipped when the spreadsheet is absent, which is the normal
+    state of a fresh clone - it is gitignored, since it holds real contact
+    details.
+    """
+    if not os.path.exists(SOURCE_XLSX):
+        return
+
+    cards = glob.glob(f"{CONTACTS_DIR}/*.vcf")
+    if not cards:
+        return
+
+    newest_card = max(os.path.getmtime(path) for path in cards)
+    if os.path.getmtime(SOURCE_XLSX) <= newest_card:
+        return
+
+    raise SystemExit(
+        f"{SOURCE_XLSX} is newer than the cards in {CONTACTS_DIR}/.\n"
+        "Building now would produce a sheet from the previous data.\n\n"
+        "Regenerate the cards first, then build the sheet:\n\n"
+        "    python3 generate.py && python3 build_sheet.py\n"
+    )
 
 
 def collect() -> dict:
@@ -531,6 +566,8 @@ def collect() -> dict:
 
 
 def main():
+    check_cards_are_current()
+
     data = collect()
     if not data["people"]:
         raise SystemExit(
