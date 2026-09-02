@@ -106,26 +106,6 @@
   }
   .lede { color: var(--muted); max-width: 62ch; margin: 0; }
 
-  /* --- How-to --- */
-  .howto {
-    border-left: 3px solid var(--accent);
-    padding: 0.875rem 0 0.875rem 1rem;
-    margin: 1.75rem 0 0;
-    display: flex; flex-direction: column; gap: 0.35rem;
-    color: var(--muted);
-    font-size: var(--step--1);
-  }
-  .howto b { color: var(--ink); font-weight: 600; }
-  .howto code {
-    font-family: var(--mono);
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 0.05em 0.35em;
-    font-size: 0.95em;
-    color: var(--ink);
-  }
-
   /* --- Toolbar --- */
   .toolbar {
     position: sticky; top: 0; z-index: 10;
@@ -276,7 +256,6 @@
       mask-image: linear-gradient(to right, #000 88%, transparent 100%);
     }
     .chip { flex: 0 0 auto; }
-    .howto { font-size: var(--step--1); }
   }
 
   /* Coarse pointers need a bigger hit area than a mouse. */
@@ -292,7 +271,7 @@
   /* --- Print: the sheet the badge table actually works from --- */
   @media print {
     :root { --paper: #FFF; --surface: #FFF; --ink: #000; --muted: #444; --rule: #BBB; }
-    .toolbar, .howto, .btn { display: none !important; }
+    .toolbar, .btn { display: none !important; }
     body { background: #FFF; }
     .wrap { max-width: none; padding: 0; }
     .role { break-inside: auto; margin-top: 1.5rem; }
@@ -312,10 +291,6 @@
       Everyone&rsquo;s QR code, grouped by role. Scanning one saves that person
       straight to a phone.
     </p>
-    <div class="howto">
-      <div>Each code&rsquo;s file name is printed under it &mdash; the images are in the <code>qrcodes</code> folder.</div>
-      <div>Click a tile once its code is on the nametag. Your progress saves automatically.</div>
-    </div>
   </header>
 
   <div class="toolbar">
