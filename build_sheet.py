@@ -4,15 +4,20 @@ Build the nametag QR assembly sheet.
 Produces nametag-sheet.html: every attendee's QR code grouped by role, with
 the file name of each QR image, for whoever is placing the codes on printed
 nametags. The page is self-contained - QR images are embedded as data URIs -
-so it works from a file:// path, a shared link, or GitHub Pages.
+so it works from a file:// path, a shared link, or GitHub Pages. The one
+exception is the Download Contact button on each card, which fetches the
+vCard from GitHub Pages and therefore needs a connection; the QR codes and
+the placed-progress checklist keep working offline.
 
 File:          build_sheet.py
 Author:        ICAOS
 Created:       2026-09-02
-Last modified: 2026-09-02
+Last modified: 2026-09-03
 
 Change history:
   2026-09-02  Initial version.
+  2026-09-03  Added a Download Contact button to each card, dropped the QR
+              file name from the cards, and made cards full width on phones.
 
 TODO:
   - If the attendee list grows much past ~300, consider linking the QR
@@ -165,7 +170,8 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
     padding: 0.5rem 0.75rem;
   }
   .search::placeholder { color: var(--muted); }
-  .search:focus-visible, .chip:focus-visible, .btn:focus-visible, .tile:focus-visible {
+  .search:focus-visible, .chip:focus-visible, .btn:focus-visible,
+  .toggle:focus-visible, .dl:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
@@ -241,6 +247,12 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
     border: 1px solid var(--rule);
     border-radius: 6px;
     padding: 0.875rem;
+  }
+  /* The tappable "placed" area. Stripped back to a bare button so it keeps
+     the layout the tile itself used to have. */
+  .toggle {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    background: none; border: 0; padding: 0; margin: 0;
     text-align: left;
     font: inherit; color: inherit;
     cursor: pointer;
@@ -248,6 +260,23 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
   .tile:hover { border-color: var(--accent); }
   .tile[data-done="true"] { background: var(--done); border-color: var(--done-ink); }
   .tile[data-done="true"] .name { color: var(--done-ink); }
+
+  /* Download Contact - secondary to the QR, so it reads as an outline
+     button rather than competing with the accent colour. */
+  .dl {
+    display: block;
+    margin-top: auto;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    background: none;
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+  }
+  .dl:hover { background: var(--accent); color: var(--surface); }
 
   .qr {
     width: 100%; aspect-ratio: 1; display: block;
@@ -267,10 +296,6 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
     color: var(--accent);
     line-height: 1.3;
   }
-  .file {
-    font-family: var(--mono); font-size: 0.6875rem;
-    color: var(--muted); word-break: break-all; line-height: 1.35;
-  }
   .mark {
     font-family: var(--mono); font-size: var(--step--1);
     color: var(--done-ink); font-weight: 500;
@@ -280,6 +305,10 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
   .empty { color: var(--muted); padding: 2rem 0; }
 
   @media (max-width: 34rem) {
+    /* One card per row on a phone: the QR gets the full width, which makes
+       it big enough to scan straight off the screen. */
+    .grid { grid-template-columns: 1fr; }
+    .qr { max-width: 18rem; margin-inline: auto; }
     .toolrow { gap: 0.5rem; }
     .search { flex: 1 1 100%; order: -1; }
     .progress { flex: 1 1 auto; }
@@ -301,7 +330,7 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .tile, .chip, .btn { transition: border-color 120ms ease, background 120ms ease, color 120ms ease; }
+    .tile, .chip, .btn, .dl { transition: border-color 120ms ease, background 120ms ease, color 120ms ease; }
   }
 
   /* --- Print: the sheet the badge table actually works from --- */
@@ -314,6 +343,7 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
     .role-head { break-after: avoid; }
     .grid { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
     .tile { break-inside: avoid; border-color: #BBB; }
+    .dl { display: none; }
     /* Keep printed codes near 1in so a phone camera locks on reliably. */
     .qr { width: 1.05in; height: 1.05in; margin: 0 auto; }
   }
@@ -331,7 +361,7 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
 
   <div class="toolbar">
     <div class="toolrow">
-      <input class="search" id="q" type="search" placeholder="Search a name, state, or file name" aria-label="Search attendees">
+      <input class="search" id="q" type="search" placeholder="Search a name, state, or role" aria-label="Search attendees">
       <span class="progress" id="progress"></span>
       <button class="btn" id="print" type="button">Print</button>
       <button class="btn" id="reset" type="button">Clear progress</button>
@@ -398,26 +428,46 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
 
+  /* The tile holds two separate controls, so it is a plain container rather
+     than a button: tapping the QR/name area toggles "placed" for whoever is
+     assembling nametags, while Download Contact is an ordinary link that
+     saves the vCard. Nesting a link inside a button would be invalid markup
+     and every download tap would also flip the placed state. */
   function tile(p) {
-    const el = document.createElement("button");
+    const el = document.createElement("div");
     el.className = "tile";
-    el.type = "button";
     el.dataset.done = done.has(p.slug);
-    el.setAttribute("aria-pressed", done.has(p.slug));
-    el.innerHTML =
+
+    const toggle = document.createElement("button");
+    toggle.className = "toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-pressed", done.has(p.slug));
+    toggle.innerHTML =
       '<img class="qr" alt="QR code for ' + escapeHtml(p.name) + '" src="data:image/png;base64,' + p.qr + '">' +
       '<span class="name">' + escapeHtml(p.name) + '</span>' +
       (p.org ? '<span class="org">' + escapeHtml(p.org) + '</span>' : '') +
       (p.title !== p.group ? '<span class="roles">' + escapeHtml(p.title) + '</span>' : '') +
-      '<span class="file">' + escapeHtml(p.slug) + '.png</span>' +
       '<span class="mark">&check; placed</span>';
-    el.onclick = () => {
+    toggle.onclick = () => {
       done.has(p.slug) ? done.delete(p.slug) : done.add(p.slug);
       el.dataset.done = done.has(p.slug);
-      el.setAttribute("aria-pressed", done.has(p.slug));
+      toggle.setAttribute("aria-pressed", done.has(p.slug));
       save();
       updateProgress();
     };
+
+    /* download= only takes effect same-origin; when the sheet is opened from
+       a file:// path the browser navigates to the vCard instead, which iOS
+       and Android both hand to the contacts app anyway. */
+    const dl = document.createElement("a");
+    dl.className = "dl";
+    dl.href = p.vcf;
+    dl.setAttribute("download", p.slug + ".vcf");
+    dl.rel = "noopener";
+    dl.textContent = "Download Contact";
+    dl.setAttribute("aria-label", "Download contact for " + p.name);
+
+    el.append(toggle, dl);
     return el;
   }
 
@@ -474,6 +524,15 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
 '''
 
 OUTPUT = "nametag-sheet.html"
+
+# Where the cards are served from. The Download Contact button needs an
+# absolute URL: the sheet is often opened from a file:// path or a shared
+# copy, where a relative link would point at nothing. This must match the
+# URL generate.py encodes into the QR codes.
+GITHUB_USERNAME = "icaos"
+REPO_NAME = "abm-contact-cards"
+PAGES_BASE = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
+
 CONTACTS_DIR = "contacts"
 QRCODES_DIR = "qrcodes"
 SOURCE_XLSX = "NameTag_Data_1.xlsx"
@@ -570,6 +629,7 @@ def collect() -> dict:
             "title": title,
             "group": section_for(title, org),
             "qr": base64.b64encode(open(qr_path, "rb").read()).decode(),
+            "vcf": f"{PAGES_BASE}/{CONTACTS_DIR}/{slug}.vcf",
         })
 
     counts = collections.Counter(person["group"] for person in people)
