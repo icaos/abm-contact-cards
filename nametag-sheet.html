@@ -1,4 +1,8 @@
 <title>ABM Contact Cards</title>
+<!-- Without this, mobile Safari lays the page out at a virtual 980px and
+     zooms out to fit, which shrinks the cards to four per row and makes the
+     header unreadable. Every media query below depends on it. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&family=Quicksand:wght@400;500;600;700&display=swap">
@@ -264,6 +268,18 @@
   .empty { color: var(--muted); padding: 2rem 0; }
 
   @media (max-width: 34rem) {
+    /* The type scale's floors are tuned for desktop density, where a lot of
+       names have to fit on screen at once. On a phone that lands at 12-14px,
+       which is too small to read comfortably, so lift the bottom of the
+       scale here only - print and desktop keep the tighter setting.
+       Keeping body text at 16px also stops iOS Safari from zooming the page
+       in when the search field is focused, which it does below 16px. */
+    :root {
+      --step--1: 0.875rem;
+      --step-0:  1rem;
+      --step-1:  1.125rem;
+    }
+
     /* One card per row on a phone: the QR gets the full width, which makes
        it big enough to scan straight off the screen. */
     .grid { grid-template-columns: 1fr; }
@@ -284,6 +300,9 @@
 
   /* Coarse pointers need a bigger hit area than a mouse. */
   @media (pointer: coarse) {
+    /* 44px is the smallest reliably tappable target on iOS. */
+    .dl, .chip, .btn { min-height: 2.75rem; }
+    .dl { display: flex; align-items: center; justify-content: center; }
     .chip { padding: 0.45rem 0.85rem; }
     .btn { padding: 0.55rem 0.9rem; }
   }
