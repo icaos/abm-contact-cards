@@ -13,3 +13,8 @@ venv/
 
 # WSL download provenance markers
 *:Zone.Identifier
+
+# CodeGraph local index. It ships its own .gitignore that keeps that one file
+# trackable, which is why the directory still shows up as untracked. Nothing
+# in here belongs in the repo - the database is rebuilt per machine.
+.codegraph/
