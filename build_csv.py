@@ -42,6 +42,11 @@ import re
 
 import openpyxl
 
+# The exclusion list lives in generate.py so there is exactly one copy of it.
+# The badge CSV must drop the same people the cards drop, or the printer gets
+# a row with no QR image to go with it.
+from generate import EXCLUDED_NAMES
+
 SOURCE_XLSX = "NameTag_Data_1.xlsx"
 SOURCE_SHEET = "Submissions"
 QRCODES_DIR = "qrcodes"
@@ -75,6 +80,8 @@ def load_rows() -> list:
 
         first, last = field("First"), field("Last")
         if not first and not last:
+            continue
+        if f"{first} {last}".strip().lower() in EXCLUDED_NAMES:
             continue
 
         people.append({
