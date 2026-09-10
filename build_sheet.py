@@ -12,7 +12,7 @@ the placed-progress checklist keep working offline.
 File:          build_sheet.py
 Author:        ICAOS
 Created:       2026-09-02
-Last modified: 2026-09-03
+Last modified: 2026-09-10
 
 Change history:
   2026-09-02  Initial version.
@@ -22,6 +22,9 @@ Change history:
               rendered the page at a virtual 980px and zoomed out, so no
               media query in this file had ever applied on a phone. Lifted
               the type scale floors and tap targets on small screens.
+  2026-09-10  Hid the QR code on phone-width screens, leaving the Download
+              Contact button. A phone cannot scan a code on its own screen.
+              Tablet, desktop and print are unchanged.
 
 TODO:
   - If the attendee list grows much past ~300, consider linking the QR
@@ -325,10 +328,19 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
       --step-1:  1.125rem;
     }
 
-    /* One card per row on a phone: the QR gets the full width, which makes
-       it big enough to scan straight off the screen. */
+    /* One card per row on a phone.
+
+       The QR code is hidden at this width. Whoever is reading the sheet here
+       is already ON a phone, and a phone cannot scan a code displayed on its
+       own screen - so the code is not just redundant, it is unusable, and it
+       was taking the top half of every card ahead of the button that does
+       work. Download Contact fetches the same vCard the code points at.
+
+       Tablets and desktops keep the code, because there the sheet is held up
+       for someone else to scan, and because the badge assembly work is done
+       by matching printed codes against the ones on screen. */
     .grid { grid-template-columns: 1fr; }
-    .qr { max-width: 18rem; margin-inline: auto; }
+    .qr { display: none; }
     .toolrow { gap: 0.5rem; }
     .search { flex: 1 1 100%; order: -1; }
     .progress { flex: 1 1 auto; }
@@ -367,8 +379,11 @@ TEMPLATE = r'''<title>ABM Contact Cards</title>
     .grid { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
     .tile { break-inside: avoid; border-color: #BBB; }
     .dl { display: none; }
-    /* Keep printed codes near 1in so a phone camera locks on reliably. */
-    .qr { width: 1.05in; height: 1.05in; margin: 0 auto; }
+    /* Keep printed codes near 1in so a phone camera locks on reliably.
+       display is set back explicitly: the phone rule above hides the code,
+       and printing from a narrow viewport would otherwise carry that over
+       and produce a sheet of captions with no codes on it. */
+    .qr { display: block; width: 1.05in; height: 1.05in; margin: 0 auto; }
   }
 </style>
 
