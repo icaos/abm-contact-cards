@@ -80,6 +80,26 @@ let GitHub Pages redeploy. The merge files stay local — they are gitignored.
 
 Add a row to the spreadsheet and rerun. A new slug, card, and QR code appear.
 
+## Excluding someone permanently
+
+Some people must never get a card, even though their row is still in the
+source form export. Deleting their `.vcf` and `.png` by hand does not hold —
+the next `generate.py` run recreates both, and nothing reports that it did.
+
+Add their name to `EXCLUDED_NAMES` in `generate.py` instead:
+
+```python
+EXCLUDED_NAMES = {
+    "thomas travis",
+}
+```
+
+Match is on the lowercased `First Last` from the spreadsheet. `build_csv.py`
+imports the same set, so the badge CSV drops them too and the printer never
+gets a row whose QR image does not exist. Then delete their existing
+`contacts/<slug>.vcf` and `qrcodes/<slug>.png` once, rerun the chain, and
+commit — pushing the deletion is what takes the card off GitHub Pages.
+
 ## Outputs for badge production
 
 | File | For | Notes |

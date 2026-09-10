@@ -46,6 +46,18 @@ SOURCE_SHEET = "Submissions"
 CONTACTS_DIR = "contacts"
 QRCODES_DIR = "qrcodes"
 
+# People who must never appear in any generated output, matched on the
+# lowercased "First Last" from the spreadsheet.
+#
+# This is a permanent exclusion, not a one-off deletion. The source sheet is
+# a form export that can be re-pulled at any time with these rows still in
+# it; without this list a routine re-export would silently re-create the
+# card, the QR code and the badge row, and nothing would report it. Deleting
+# the generated files by hand does not survive the next run - this does.
+EXCLUDED_NAMES = {
+    "thomas travis",
+}
+
 # --- Helpers -------------------------------------------------------------
 
 
@@ -100,6 +112,10 @@ def load_people(path: str, sheet: str) -> list:
         if not first and not last:
             continue
 
+        full_name = f"{first} {last}".strip()
+        if full_name.lower() in EXCLUDED_NAMES:
+            continue
+
         state, title = field("State"), field("Title")
 
         # The State column is free text and holds three different things:
@@ -119,7 +135,7 @@ def load_people(path: str, sheet: str) -> list:
             "row": row_number,
             "first": first,
             "last": last,
-            "full_name": f"{first} {last}".strip(),
+            "full_name": full_name,
             "org": org,
             "title": title,
             "email": field("Email"),
